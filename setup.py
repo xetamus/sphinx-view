@@ -21,6 +21,7 @@ setup(
         'livereload',
         'py-buzz',
         'sphinx',
+        'sphinx-bootstrap-theme',
     ],
     extras_require={
         'dev': [

@@ -86,10 +86,13 @@ class Builder:
 
     def build_conf_file(self):
         final_conf_path = os.path.join(self.build_dir, 'conf.py')
-        conf_content = textwrap.dedent("""
+        conf_content = textwrap.dedent("""\
+            import sphinx_bootstrap_theme
             source_suffix = '{ext}'
             master_doc = 'index'
-            html_theme = 'alabaster'
+            html_theme = 'bootstrap'
+            html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
+            html_theme_options = dict([('bootswatch_theme', "slate")])
             html_static_path = ['_static']
             extensions = ['sphinx.ext.autodoc']
         """).format(
