@@ -16,6 +16,12 @@ if __name__ == '__main__':
         description='Provides a live view of sphinx or restructuredtext docs',
         )
     parser.add_argument(
+        '-o',
+        '--host',
+        default='localhost',
+        help='Set the flask host value to serve on a different IP than localhost',
+        )
+    parser.add_argument(
         '-p',
         '--port',
         type=int,
@@ -59,9 +65,9 @@ if __name__ == '__main__':
     if args.build_dir is not None:
         config['WORKING_DIR'] = expand_path(args.build_dir)
         (server, builder) = create_server(**config)
-        server.serve(port=args.port, host='localhost', open_url_delay=0.5)
+        server.serve(port=args.port, host=args.host, open_url_delay=0.5)
     else:
         with tempfile.TemporaryDirectory() as working_dir:
             config['WORKING_DIR'] = working_dir
             (server, builder) = create_server(**config)
-            server.serve(port=args.port, host='localhost', open_url_delay=0.5)
+            server.serve(port=args.port, host=args.host, open_url_delay=0.5)
